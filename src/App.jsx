@@ -36,7 +36,7 @@ export default function App() {
       <header className="header">
         <div className="container nav">
           <a className="brand" href="#home" onClick={close}>
-            <img className="brand-logo" src="/logo.png" alt="SAMAZ Mobile Technology" />
+            <img className="brand-logo" src={`${import.meta.env.BASE_URL}logo.png`} alt="SAMAZ Mobile Technology" />
           </a>
           <nav className={open ? 'nav-links open' : 'nav-links'}>
             <a href="#about" onClick={close}>About</a>
@@ -68,7 +68,7 @@ export default function App() {
               </div>
             </div>
             <div className="hero-visual">
-              <img className="hero-store" src="/store.png" alt="SAMAZ Mobile Technology store" />
+              <img className="hero-store" src={`${import.meta.env.BASE_URL}store.png`} alt="SAMAZ Mobile Technology store" />
               <div className="float f1"><Smartphone/><div><b>Premium Devices</b><small>Samsung & more</small></div></div>
               <div className="float f2"><Wrench/><div><b>Same-Day Repairs</b><small>Fast technical support</small></div></div>
             </div>
@@ -177,7 +177,7 @@ export default function App() {
         <section id="contact" className="section contact-section">
           <div className="container contact-grid">
             <div><span className="eyebrow light">CONTACT SAMAZ</span><h2>Ready to talk technology?</h2><p>Contact us for mobile phones, repairs, accessories, credit enquiries or digital development.</p></div>
-            <img className="contact-phone" src="/phone.png" alt="Smartphone" />
+            <img className="contact-phone" src={`${import.meta.env.BASE_URL}phone.png`} alt="Smartphone" />
             <div className="contact-cards">
               <a href="tel:+263786137481"><Phone/><span><small>Phone</small><strong>+263 78 613 7481</strong></span></a>
               <a href="mailto:info@samazmobiletechnology.co.zw"><Mail/><span><small>Email</small><strong>info@samazmobiletechnology.co.zw</strong></span></a>
@@ -187,7 +187,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer><div className="container footer-grid"><a className="brand footer-brand" href="#home"><img className="brand-logo footer-logo" src="/logo.png" alt="SAMAZ Mobile Technology" /></a><p>© {new Date().getFullYear()} SAMAZ Mobile Technology. All rights reserved.</p></div></footer>
+      <footer><div className="container footer-grid"><a className="brand footer-brand" href="#home"><img className="brand-logo footer-logo" src={`${import.meta.env.BASE_URL}logo.png`} alt="SAMAZ Mobile Technology" /></a><p>© {new Date().getFullYear()} SAMAZ Mobile Technology. All rights reserved.</p><a className="footer-credit" href="https://cybercothtechnetworks.co.zw/" target="_blank" rel="noopener noreferrer">Created by cybercothtechnetworks.co.zw</a></div></footer>
     </>
   );
 }
