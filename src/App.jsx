@@ -69,7 +69,6 @@ export default function App() {
             </div>
             <div className="hero-visual">
               <img className="hero-store" src="/store.png" alt="SAMAZ Mobile Technology store" />
-              <img className="hero-phone" src="/phone.png" alt="Smartphone" />
               <div className="float f1"><Smartphone/><div><b>Premium Devices</b><small>Samsung & more</small></div></div>
               <div className="float f2"><Wrench/><div><b>Same-Day Repairs</b><small>Fast technical support</small></div></div>
             </div>
@@ -178,6 +177,7 @@ export default function App() {
         <section id="contact" className="section contact-section">
           <div className="container contact-grid">
             <div><span className="eyebrow light">CONTACT SAMAZ</span><h2>Ready to talk technology?</h2><p>Contact us for mobile phones, repairs, accessories, credit enquiries or digital development.</p></div>
+            <img className="contact-phone" src="/phone.png" alt="Smartphone" />
             <div className="contact-cards">
               <a href="tel:+263786137481"><Phone/><span><small>Phone</small><strong>+263 78 613 7481</strong></span></a>
               <a href="mailto:info@samazmobiletechnology.co.zw"><Mail/><span><small>Email</small><strong>info@samazmobiletechnology.co.zw</strong></span></a>
