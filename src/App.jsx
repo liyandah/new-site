@@ -15,6 +15,11 @@ const services = [
   { icon: Code2, title: 'Web & Application Development', text: 'Responsive websites, business web applications, custom software and systems integration.' }
 ];
 
+const websites = [
+  { name: 'Cyber Cothtech Networks', host: 'cybercothtechnetworks.co.zw', url: 'https://cybercothtechnetworks.co.zw/', text: 'Enterprise IT, hosting and application development.' },
+  { name: 'Himmelstor Farm', host: 'himmelstor.co.zw', url: 'https://himmelstor.co.zw/', text: 'Integrated agriculture, consulting and agro-tourism in Zimbabwe.' }
+];
+
 const repairs = [
   { icon: BatteryCharging, title: 'Battery Replacement', text: 'Battery and related power support.' },
   { icon: MonitorSmartphone, title: 'Screen / LCD', text: 'Screen and LCD replacement for damaged displays.' },
@@ -145,9 +150,20 @@ export default function App() {
                 <div><Network/><span><strong>ICT Partnership</strong>Broader ICT services with Cyber Cothtech Networking.</span></div>
               </div>
             </div>
-            <div className="dashboard-mock">
-              <div className="mock-top"><span></span><span></span><span></span></div>
-              <div className="mock-body"><div className="mock-side"></div><div className="mock-content"><div className="mock-title"></div><div className="mock-stats"><i></i><i></i><i></i></div><div className="mock-chart"><b></b><b></b><b></b><b></b><b></b></div></div></div>
+            <div className="site-previews">
+              {websites.map((site) => (
+                <article className="browser" key={site.host}>
+                  <div className="browser-bar"><i></i><i></i><i></i><span>{site.host}</span></div>
+                  <div className="browser-frame">
+                    <iframe src={site.url} title={site.name} loading="lazy" />
+                  </div>
+                  <a href={site.url} target="_blank" rel="noopener noreferrer">
+                    <strong>{site.name}</strong>
+                    <span>{site.text}</span>
+                    <em>View site <ArrowRight size={16}/></em>
+                  </a>
+                </article>
+              ))}
             </div>
           </div>
         </section>
