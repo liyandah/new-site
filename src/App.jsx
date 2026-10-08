@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Menu, X, Smartphone, Wrench, Car, Code2, Globe2, Database,
   ShieldCheck, ShoppingBag, CreditCard, BatteryCharging,
@@ -27,9 +27,41 @@ const repairs = [
   { icon: RefreshCw, title: 'Flashing & Software', text: 'Software reloads, firmware support and updates.' }
 ];
 
+function useSectionInView(threshold = 0.2) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return undefined;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInView(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold, rootMargin: '0px 0px -6% 0px' }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return [ref, inView];
+}
+
 export default function App() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+  const [servicesRef, servicesIn] = useSectionInView(0.18);
+  const [contactRef, contactIn] = useSectionInView(0.22);
 
   return (
     <>
@@ -106,12 +138,12 @@ export default function App() {
           </div>
         </section>
 
-        <section id="services" className="section">
+        <section id="services" ref={servicesRef} className={servicesIn ? 'section is-in' : 'section'}>
           <div className="container">
             <div className="section-heading"><span className="eyebrow">WHAT WE DO</span><h2>Products & Services</h2><p>One technology partner for mobile, repair, vehicle and digital needs.</p></div>
             <div className="service-grid">
               {services.map(({icon:Icon,title,text}) => (
-                <article className="service-card" key={title}>
+                <article className="service-card reveal" key={title}>
                   <div className="service-icon"><Icon/></div>
                   <h3>{title}</h3><p>{text}</p>
                   <a href="#contact">Enquire <ChevronRight size={17}/></a>
@@ -174,14 +206,14 @@ export default function App() {
           </div>
         </section>
 
-        <section id="contact" className="section contact-section">
+        <section id="contact" ref={contactRef} className={contactIn ? 'section contact-section is-in' : 'section contact-section'}>
           <div className="container contact-grid">
             <div><span className="eyebrow light">CONTACT SAMAZ</span><h2>Ready to talk technology?</h2><p>Contact us for mobile phones, repairs, accessories, credit enquiries or digital development.</p></div>
             <img className="contact-phone" src={`${import.meta.env.BASE_URL}phone.png`} alt="Smartphone" />
             <div className="contact-cards">
-              <a href="tel:+263786137481"><Phone/><span><small>Phone</small><strong>+263 78 613 7481</strong></span></a>
-              <a href="mailto:info@samazmobiletechnology.co.zw"><Mail/><span><small>Email</small><strong>info@samazmobiletechnology.co.zw</strong></span></a>
-              <a href="https://samazmobiletechnology.co.zw"><Globe2/><span><small>Website</small><strong>samazmobiletechnology.co.zw</strong></span></a>
+              <a className="reveal" href="tel:+263786137481"><Phone/><span><small>Phone</small><strong>+263 78 613 7481</strong></span></a>
+              <a className="reveal" href="mailto:info@samazmobiletechnology.co.zw"><Mail/><span><small>Email</small><strong>info@samazmobiletechnology.co.zw</strong></span></a>
+              <a className="reveal" href="https://samazmobiletechnology.co.zw"><Globe2/><span><small>Website</small><strong>samazmobiletechnology.co.zw</strong></span></a>
             </div>
           </div>
         </section>
