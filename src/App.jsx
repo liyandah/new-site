@@ -47,7 +47,7 @@ function useSectionInView(threshold = 0.2) {
           observer.disconnect();
         }
       },
-      { threshold, rootMargin: '0px 0px -6% 0px' }
+      { threshold, rootMargin: '0px 0px -8% 0px' }
     );
 
     observer.observe(node);
@@ -60,8 +60,8 @@ function useSectionInView(threshold = 0.2) {
 export default function App() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
-  const [servicesRef, servicesIn] = useSectionInView(0.18);
-  const [contactRef, contactIn] = useSectionInView(0.22);
+  const [servicesRef, servicesIn] = useSectionInView(0.25);
+  const [contactRef, contactIn] = useSectionInView(0.3);
 
   return (
     <>
