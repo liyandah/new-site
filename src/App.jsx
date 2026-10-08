@@ -27,7 +27,7 @@ const repairs = [
   { icon: RefreshCw, title: 'Flashing & Software', text: 'Software reloads, firmware support and updates.' }
 ];
 
-function useSectionInView(threshold = 0.2) {
+function useSectionInView(threshold = 0.2, { replay = false } = {}) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
 
@@ -42,17 +42,23 @@ function useSectionInView(threshold = 0.2) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        const visible = entry.isIntersecting && entry.intersectionRatio >= threshold;
+        if (visible) {
           setInView(true);
-          observer.disconnect();
+          if (!replay) observer.disconnect();
+        } else if (replay && !entry.isIntersecting) {
+          setInView(false);
         }
       },
-      { threshold, rootMargin: '0px 0px -8% 0px' }
+      {
+        threshold: replay ? [0, threshold] : threshold,
+        rootMargin: '0px 0px -8% 0px'
+      }
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [threshold]);
+  }, [threshold, replay]);
 
   return [ref, inView];
 }
@@ -61,7 +67,7 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
   const [servicesRef, servicesIn] = useSectionInView(0.25);
-  const [contactRef, contactIn] = useSectionInView(0.3);
+  const [contactRef, contactIn] = useSectionInView(0.3, { replay: true });
 
   return (
     <>
